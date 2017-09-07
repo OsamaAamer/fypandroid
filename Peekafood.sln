@@ -11,6 +11,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Peekafood", "Peekafood\Peek
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Peekafood\Peekafood\Peekafood.projitems*{32a57516-1532-4a99-9e12-d7217e7bee2d}*SharedItemsImports = 4
+		Peekafood\Peekafood\Peekafood.projitems*{dd83cb90-500d-479b-b3ad-c255840763d2}*SharedItemsImports = 4
 		Peekafood\Peekafood\Peekafood.projitems*{e88e616b-673d-478e-b2d8-fc36814bf171}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

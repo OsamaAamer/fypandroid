@@ -1,35 +1,65 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
 using Android.OS;
+using Peekafood.Droid.Fragments;
+
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 
 namespace Peekafood.Droid
 {
-	[Activity (Label = "Peekafood.Android", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
-	{
-		int count = 1;
+    [Activity(Label = "@string/app_name", MainLauncher = true, LaunchMode = Android.Content.PM.LaunchMode.SingleTop, Icon = "@drawable/icon", Theme = "@style/Theme.MyTheme")]
+    public class MainActivity : AppCompatActivity
+    {
 
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+        BottomNavigationView bottomNavigation;
+        protected override void OnCreate(Bundle bundle)
+        {
 
-			// Set our view from the "main" layout resource
-			SetContentView (Resource.Layout.Main);
+            base.OnCreate(bundle);
+            SetContentView(Resource.Layout.main);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            if (toolbar != null)
+            {
+                SetSupportActionBar(toolbar);
+                SupportActionBar.SetDisplayHomeAsUpEnabled(false);
+                SupportActionBar.SetHomeButtonEnabled(false);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-			};
-		}
-	}
+            }
+
+            bottomNavigation = FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
+
+
+            bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
+
+            LoadFragment(Resource.Id.menu_home);
+        }
+
+        private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
+        {
+            LoadFragment(e.Item.ItemId);
+        }
+
+        void LoadFragment(int id)
+        {
+            Android.Support.V4.App.Fragment fragment = null;
+            switch (id)
+            {
+                case Resource.Id.menu_home:
+                    fragment = Fragment1.NewInstance();
+                    break;
+                case Resource.Id.menu_audio:
+                    fragment = Fragment2.NewInstance();
+                    break;
+                case Resource.Id.menu_video:
+                    fragment = Fragment3.NewInstance();
+                    break;
+            }
+            if (fragment == null)
+                return;
+
+            SupportFragmentManager.BeginTransaction()
+               .Replace(Resource.Id.content_frame, fragment)
+               .Commit();
+        }
+    }
 }
-
-
