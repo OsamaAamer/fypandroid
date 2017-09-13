@@ -122,5 +122,24 @@ namespace Peekafood.Droid
                .Replace(Resource.Id.content_frame, fragment)
                .Commit();
         }
+
+        public override void OnBackPressed()
+        {
+            if (LoginActivity.IsLoggedIn())
+            {
+                MinimizeApp();
+                return;
+            }
+
+            base.OnBackPressed();
+        }
+
+        private void MinimizeApp()
+        {
+            Intent startMain = new Intent(Intent.ActionMain);
+            startMain.AddCategory(Intent.CategoryHome);
+            startMain.SetFlags(ActivityFlags.NewTask);
+            StartActivity(startMain);
+        }
     }
 }
