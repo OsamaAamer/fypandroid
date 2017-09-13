@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Peekafood.Android</string>
+  <string name="facebook_app_id">484235638598523</string>
+  <string name="loginTitle">LOGIN</string>
   <string name="fragment1">This is the first tab.</string>
   <string name="fragment2">This is the second tab.</string>
   <string name="fragment3">This is the third tab.</string>
