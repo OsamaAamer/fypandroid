@@ -103,31 +103,46 @@ namespace Peekafood.Droid
         void LoadFragment(int id)
         {
             Android.Support.V4.App.Fragment fragment = null;
+            System.String fragmentTag = "";
+
             switch (id)
             {
                 case Resource.Id.menu_home:
                     fragment = Fragment1.NewInstance();
+                    fragmentTag = "FRAGMENT1";
                     break;
                 case Resource.Id.menu_audio:
                     fragment = Fragment2.NewInstance();
+                    fragmentTag = "FRAGMENT2";
                     break;
                 case Resource.Id.menu_video:
                     fragment = Fragment3.NewInstance();
+                    fragmentTag = "FRAGMENT3";
                     break;
             }
             if (fragment == null)
                 return;
 
             SupportFragmentManager.BeginTransaction()
-               .Replace(Resource.Id.content_frame, fragment)
+               .Replace(Resource.Id.content_frame, fragment, fragmentTag)
                .Commit();
         }
 
         public override void OnBackPressed()
         {
+            Android.Support.V4.App.Fragment myFragment = null;
+            myFragment = SupportFragmentManager.FindFragmentByTag("FRAGMENT1");
+
             if (LoginActivity.IsLoggedIn())
             {
-                MinimizeApp();
+                if (myFragment != null && myFragment.IsVisible)
+                {
+                    MinimizeApp();
+                }
+                else
+                {
+                    LoadFragment(Resource.Id.menu_home);
+                }
                 return;
             }
 

@@ -65,5 +65,14 @@ namespace Peekafood.Droid
             AccessToken accessToken = AccessToken.CurrentAccessToken;
             return accessToken != null;
         }
+
+        public override void OnBackPressed()
+        {
+            Intent startMain = new Intent(Intent.ActionMain);
+            startMain.AddCategory(Intent.CategoryHome);
+            startMain.SetFlags(ActivityFlags.NewTask);
+            StartActivity(startMain);
+            return;
+        }
     }
 }
