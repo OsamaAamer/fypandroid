@@ -1,6 +1,7 @@
 ﻿using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
+using Android.Widget;
 
 namespace Peekafood.Droid.Fragments
 {
@@ -23,7 +24,12 @@ namespace Peekafood.Droid.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var ignored = base.OnCreateView(inflater, container, savedInstanceState);
-            return inflater.Inflate(Resource.Layout.fragment3, null);
+            View inflatedView = inflater.Inflate(Resource.Layout.fragment3, null);
+
+            TextView mTextName = (TextView)inflatedView.FindViewById(Resource.Id.textName);
+            mTextName.Text = MainActivity.facebookUserName;
+
+            return inflatedView;
         }
     }
 }

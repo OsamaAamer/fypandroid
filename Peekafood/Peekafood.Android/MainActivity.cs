@@ -14,6 +14,8 @@ using Android.Content;
 using Android.Runtime;
 using Xamarin.Facebook.Login;
 using Android.Widget;
+using Org.Json;
+using Android.Views;
 
 namespace Peekafood.Droid
 {
@@ -21,14 +23,13 @@ namespace Peekafood.Droid
     public class MainActivity : AppCompatActivity
     {
         BottomNavigationView bottomNavigation;
+        public static System.String facebookUserName;
 
         protected override void OnCreate(Bundle bundle)
         {
 
             base.OnCreate(bundle);
-
             //FacebookSdk.SdkInitialize(ApplicationContext);
-
             SetContentView(Resource.Layout.main);
 
             CheckLoginStatus();
@@ -91,8 +92,26 @@ namespace Peekafood.Droid
             else
             {
                 AccessToken accessToken = AccessToken.CurrentAccessToken;
-                //loadUserDetails(accessToken);
+
+                Bundle bundle = new Bundle();
+                bundle.PutString("fields", "name, id");
+
+                GraphCallback graphCallBack = new GraphCallback();
+                graphCallBack.RequestCompleted += OnGetFriendsResponse;
+                var request = new GraphRequest(accessToken, "/" + accessToken.UserId, bundle, HttpMethod.Get, graphCallBack).ExecuteAsync();                
             }
+        }
+
+        public void OnGetFriendsResponse(object sender, GraphResponseEventArgs e)
+        {
+            JSONObject UserObject = e.Response.JSONObject;
+
+            System.String fullName = UserObject.OptString("name");
+            System.String id = UserObject.OptString("id");
+
+            facebookUserName = fullName;
+
+            return;
         }
 
         private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
@@ -156,5 +175,27 @@ namespace Peekafood.Droid
             startMain.SetFlags(ActivityFlags.NewTask);
             StartActivity(startMain);
         }
+    }
+
+    class GraphCallback : Java.Lang.Object, GraphRequest.ICallback
+    {
+        // Event to pass the response when it's completed
+        public event EventHandler<GraphResponseEventArgs> RequestCompleted = delegate { };
+
+        public void OnCompleted(GraphResponse reponse)
+        {
+            this.RequestCompleted(this, new GraphResponseEventArgs(reponse));
+        }
+    }
+
+    public class GraphResponseEventArgs : EventArgs
+    {
+        GraphResponse _response;
+        public GraphResponseEventArgs(GraphResponse response)
+        {
+            _response = response;
+        }
+
+        public GraphResponse Response { get { return _response; } }
     }
 }

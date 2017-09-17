@@ -23,6 +23,14 @@
         android:layout_marginTop="74dp"
         android:text="Logout"
         android:textAlignment="center" />
+<!--<TextView
+        android:text="Name: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textName"
+        android:gravity="center"
+        android:padding="5dp" />-->
     <RelativeLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"

@@ -3159,6 +3159,9 @@ namespace Peekafood.Droid
 			// aapt resource value: 0x7f0b00ca
 			public const int text2 = 2131427530;
 			
+			// aapt resource value: 0x7f0b00ad
+			public const int textName = 2131427501;
+			
 			// aapt resource value: 0x7f0b0063
 			public const int textSpacerNoButtons = 2131427427;
 			
@@ -3170,9 +3173,6 @@ namespace Peekafood.Droid
 			
 			// aapt resource value: 0x7f0b00ac
 			public const int textView2 = 2131427500;
-			
-			// aapt resource value: 0x7f0b00ad
-			public const int textView3 = 2131427501;
 			
 			// aapt resource value: 0x7f0b009e
 			public const int text_input_password_toggle = 2131427486;
@@ -3856,9 +3856,6 @@ namespace Peekafood.Droid
 			// aapt resource value: 0x7f06006b
 			public const int fragment2 = 2131099755;
 			
-			// aapt resource value: 0x7f06006c
-			public const int fragment3 = 2131099756;
-			
 			// aapt resource value: 0x7f060069
 			public const int loginTitle = 2131099753;
 			
@@ -3892,14 +3889,14 @@ namespace Peekafood.Droid
 			// aapt resource value: 0x7f060003
 			public const int store_picture_title = 2131099651;
 			
+			// aapt resource value: 0x7f06006c
+			public const int tab1_title = 2131099756;
+			
 			// aapt resource value: 0x7f06006d
-			public const int tab1_title = 2131099757;
+			public const int tab2_title = 2131099757;
 			
 			// aapt resource value: 0x7f06006e
-			public const int tab2_title = 2131099758;
-			
-			// aapt resource value: 0x7f06006f
-			public const int tab3_title = 2131099759;
+			public const int tab3_title = 2131099758;
 			
 			static String()
 			{
